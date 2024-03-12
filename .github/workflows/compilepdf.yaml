@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  build-resume:
+    runs-on: ubuntu-latest
+    name: Create PDF Document
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Convert to pdf
+      id: convert-to-pdf
+      uses: kbevers/pdflatex-action@v1.2.0
+      with:
+        texFile: ./cookbook.tex
+    - name: Store pdf
+      uses: actions/upload-artifact@v4
+      with:
+        name: cookbook.pdf
+        path: cookbook.pdf
